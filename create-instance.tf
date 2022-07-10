@@ -15,8 +15,7 @@ resource "google_compute_instance" "vm_instance_public" {
       image = "ubuntu-os-cloud/ubuntu-1804-lts"
     }
   }
-  metadata_startup_script = "sudo apt-get update; 
-    sudo apt-get install -yq build-essential apache2"
+  metadata_startup_script = "sudo apt-get update && sudo apt-get install -yq build-essential apache2"
   network_interface {
     network = google_compute_network.vpc.name
     subnetwork = google_compute_subnetwork.public_subnet_1.name
