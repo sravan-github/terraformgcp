@@ -23,19 +23,20 @@ resource "google_compute_instance" "default" {
     tags = ["http-server"]
 }
 
-resource "google_compute_firewall" "http-server" {
-  name    = "default-allow-http-terraform"
-  network = "default"
+//resource "google_compute_firewall" "http-server" {
+//  name    = "default-allow-http-terraform"
+//  network = "default"
 
-  allow {
-    protocol = "tcp"
-    ports    = ["80"]
-  }
+//  allow {
+//    protocol = "tcp"
+//    ports    = ["80"]
+//  }
 
   // Allow traffic from everywhere to instances with an http-server tag
-  source_ranges = ["0.0.0.0/0"]
-  target_tags   = ["http-server"]
-}
+//  source_ranges = ["0.0.0.0/0"]
+//  target_tags   = ["http-server"]
+//}
+
 
 output "ip" {
   value = "${google_compute_instance.default.network_interface.0.access_config.0.nat_ip}"
