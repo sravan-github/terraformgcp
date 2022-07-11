@@ -18,7 +18,8 @@ pipeline {
             ls -l
             pwd
             terraform init
-            terraform plan            
+            terraform plan
+            terraform apply --auto-approve
             '''
       }
     }
