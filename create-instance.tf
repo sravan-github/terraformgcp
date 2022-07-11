@@ -2,6 +2,10 @@ resource "google_compute_instance" "default" {
   name         = "virtual-machine-from-terraform"
   machine_type = "f1-micro"
   zone         = "us-central1-a"
+  
+  metadata = {
+    ssh-keys = "testuser:ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAifGBisNw/lYu+v7WWOtZK1fWeYVCRRN/GijAqBsveF0yvDuRB1SY1tNWnp2/ZSkACEEXgfnKIQgINmQr4er3CFACDoHD3voN6gxh33IV/+UXiiUPZUUHip/dbWENsDrUj1sWpL90zB2t+IkrULZvRkm9yz7ztZB5ZFofb4G4eVvdciUSG6xuogCHLkKUpCDMRjmciA/Z+gDRjGi3cfk66P+hgA9VrcmCGlJDB4+uFnpMTQXGNz3UJLDh7f9ehKMLFztzW8ZT/LfxSEpfMfGQow7w5duKH/UbTHsDH/rSoQMlLfzs+hz84AuZzicdPa+3SDYPHrfoGWCBu8RvURUXmw== testuser"
+  }
 
   boot_disk {
     initialize_params {
@@ -20,7 +24,10 @@ resource "google_compute_instance" "default" {
 
     metadata_startup_script = "sudo apt-get update && apt install python -y"
 
-    // Apply the firewall rule to allow external IPs to access this instance
+    service_account {
+    email  = "admin-account@dolphine-project.iam.gserviceaccount.com"
+    scopes = ["cloud-platform"]
+  }
     tags = ["http-server"]
 }
 
