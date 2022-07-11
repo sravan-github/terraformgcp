@@ -6,10 +6,6 @@ pipeline {
             args '-u root:root'
         }
         }
-        /*
-  environment {
-   ANSIBLE_PRIVATE_KEY=credentials('ansible-key') 
-  }*/
   stages {
     stage('Hello') {
       steps {
