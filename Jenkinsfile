@@ -14,7 +14,7 @@ pipeline {
     stage('Hello') {
       steps {
         sh '''
-            git clone https://github.com/sravan-github/ansible-role.git
+            git clone https://github.com/sravan-github/terraformgcp.git
             ls -l
             pwd
             
