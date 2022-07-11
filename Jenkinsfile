@@ -17,6 +17,7 @@ pipeline {
             git clone https://github.com/sravan-github/terraformgcp.git
             ls -l
             pwd
+            export GOOGLE_APPLICATION_CREDENTIALS="./gcp-key.json"
             terraform init
             terraform plan
             terraform apply --auto-approve
