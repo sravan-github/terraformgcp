@@ -17,7 +17,8 @@ pipeline {
             git clone https://github.com/sravan-github/terraformgcp.git
             ls -l
             pwd
-            
+            terraform init
+            terraform plan            
             '''
       }
     }
