@@ -1,6 +1,6 @@
-resource "google_compute_address" "static" {
+/*resource "google_compute_address" "static" {
   name = "ipv4-address"
-}
+}*/
 resource "google_compute_instance" "default" {
   name         = "virtual-machine-from-terraform"
   machine_type = "f1-micro"
@@ -22,10 +22,10 @@ metadata = {
 
     access_config {
       // Include this section to give the VM an external ip address
-      nat_ip = google_compute_address.static.address
+     // nat_ip = google_compute_address.static.address
     }
   }
-
+  /*
   provisioner "remote-exec" {
     connection {
       host        = google_compute_address.static.address
@@ -39,7 +39,7 @@ metadata = {
       "sudo apt install apache2 -y",
     ]
   }
-
+  */
   //  metadata_startup_script = "sudo apt-get update && sudo apt-get install apache2 -y"
 
   service_account {
