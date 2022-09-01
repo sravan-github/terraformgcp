@@ -2,7 +2,7 @@
   name = "ipv4-address"
 }*/
 resource "google_compute_instance" "default" {
-  count = 1
+  count = 2
   name         = "virtual-machine-from-terraform-${count.index+1}"
   machine_type = "f1-micro"
   zone         = "us-central1-a"
