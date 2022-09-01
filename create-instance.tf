@@ -1,6 +1,6 @@
-/*resource "google_compute_address" "static" {
+resource "google_compute_address" "static" {
   name = "ipv4-address"
-}*/
+}
 resource "google_compute_instance" "default" {
   #count = 2
   name         = "nexusvm"
