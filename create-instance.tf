@@ -2,13 +2,13 @@
   name = "ipv4-address"
 }*/
 resource "google_compute_instance" "default" {
-  count = 2
-  name         = "virtual-machine-from-terraform-${count.index+1}"
+  #count = 2
+  name         = "nexusvm"
   machine_type = "f1-micro"
   zone         = "us-central1-a"
 
 metadata = {
-    ssh-keys = "testuser:ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAifGBisNw/lYu+v7WWOtZK1fWeYVCRRN/GijAqBsveF0yvDuRB1SY1tNWnp2/ZSkACEEXgfnKIQgINmQr4er3CFACDoHD3voN6gxh33IV/+UXiiUPZUUHip/dbWENsDrUj1sWpL90zB2t+IkrULZvRkm9yz7ztZB5ZFofb4G4eVvdciUSG6xuogCHLkKUpCDMRjmciA/Z+gDRjGi3cfk66P+hgA9VrcmCGlJDB4+uFnpMTQXGNz3UJLDh7f9ehKMLFztzW8ZT/LfxSEpfMfGQow7w5duKH/UbTHsDH/rSoQMlLfzs+hz84AuZzicdPa+3SDYPHrfoGWCBu8RvURUXmw== testuser"
+    ssh-keys = "nexus:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCkOmOQISBqFwOeCsC/BvoyCUgzf6FTrKMAGj7+2mdPNaLBOxFzBypztb+hOFk57C46gEFout3kyqjl0I1CJ4Os++KEUQPdTHuwL5widGAep7HaIUSuDssjKywVjKJQWmfUjk6Fsob12bgcIUb+bbFcMQ8VBck7JAttnh/lBLvk1CfFYjq5TH80J/wWwQDIZB4pxxag9jp2s23nWXhtwk1Ft4kCPiCXf+KOxe4VrMABDT/grTTAZY2n3SrUyq+wOfdJhGRmbohbJAVxmZCmJckaUajSdnHI6Gj0yVafjJf20jzXz2cz0eLI/gMr4wTBPSv1B0rBra3Pd2ntHy9o52SF nexus"
   }
 
   boot_disk {
@@ -26,21 +26,22 @@ metadata = {
      // nat_ip = google_compute_address.static.address
     }
   }
-  /*
+  
   provisioner "remote-exec" {
     connection {
       host        = google_compute_address.static.address
       type        = "ssh"
-      user        = "testuser"
+      user        = "nexus"
       timeout     = "500s"
-      private_key = "${file("/home/sravangcp/testuser.pem")}"
+      private_key = "${file("/home/sravangcp/nexus.pem")}"
     }
     inline = [
-      "sudo apt install python -y",
-      "sudo apt install apache2 -y",
+      "chmod +x ~/nexus.sh",
+      "cd ~",
+      "./nexus.sh",
     ]
   }
-  */
+  
   //  metadata_startup_script = "sudo apt-get update && sudo apt-get install apache2 -y"
 
   service_account {
@@ -53,7 +54,7 @@ metadata = {
 
 }
 
-/*
+
 output "ip" {
   value = "${google_compute_instance.default.network_interface.0.access_config.0.nat_ip}"
-}*/
+}
