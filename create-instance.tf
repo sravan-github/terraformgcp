@@ -33,7 +33,7 @@ metadata = {
       type        = "ssh"
       user        = "nexus"
       timeout     = "500s"
-      private_key = "${file("/home/sravangcp/nexus.pem")}"
+      private_key = "${file("/home/sravangcp/terraformgcp/nexus.pem")}"
     }
     inline = [
       "chmod +x ~/nexus.sh",
